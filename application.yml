@@ -1,0 +1,100 @@
+
+logging.level:
+  org.springframework.security: DEBUG
+
+---
+spring:
+  profiles: authorization
+
+my_config:
+  # openssl genrsa -out jwt.pem 2048
+  # openssl rsa -in jwt.pem
+  privateKey: |
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEAoNf3F2jwPv2o/7R4ZCHLSsboUPksSiL15ZSm9ZWHWkqBfQ6W
+    MHMx08IYUmESt3ZENLPfdvwLMfxasIatRLel1t8XoZJkwLgW40Tur43UWxbVwyoU
+    sarh7MwjTJpAIa7f0lgvPDLyOpaaccvCneBRneJ3DTq6frY7UGZioDEOVkn/1Lc4
+    +HJzcAEemvXRY4N7w8gIuQwjz0eTA/+HfGWGLS+NvM8wcjh2lMjpdmwFez8Q1scH
+    I9EKQi3Tg+JuB2e88Vz5jQctwTAF/B7P6R9KC2MrOshmTbTRuKX4RNZbFO33ydJM
+    tdMexDXY7HGamIBYpsXkiPZ16eOFQ2hOkbc3PQIDAQABAoIBAQCcy+wE1jfeMEnf
+    fH8gnhEgBGfVCBM08n/kHtXj8rDQRHGXB/FBqgqY9E3hgOBOGOzEs9TUmUAQqoF+
+    NMwUgTMaFMFksOGnPc6SH1DPsuOhKNGaQBuMV5mGzjpbIsQCEgf/dhgWB1Q76TUG
+    WiyO2261C2AjdWz4uY15A1aB81CWrGEmQ8esiIscxZER7TgQRfPZD9yZs76CsCBS
+    xSLKiUSyI9MX00rt3w7jBEUnaC5YXwhUjcmsQ0e5n3Svx84pXVtRx08fQvNXmHcW
+    x+UnlD4qFAFs6LoZqOLHUj4mefqp1h6OQRnN8VusMK1nJm9+zNr1Hxj/w7l88quS
+    bk45AanBAoGBAMv9hL2kupuKBe3DRsRnIkDUoZ899v2ziMcwpNULnNvCdbeddPxK
+    LhfHzc3svf4jGkfnLbh5eEu/6TlVRwc9r2kmihjXxPTOJdCtvlAIWg0qwjPlP+i4
+    ol66z11T6FyNcUuv4S9qXOChlUhGAOKCKsn20w8SJsRxxD4n3P318+vjAoGBAMna
+    QTxeGns8JTFjtjD2fUt6pLC8OB8Hv2zdJD5VriBWbq0LQnifokPdgloAGw97/i/B
+    7SxTOvrqOqvxtun08xl0Ii5SU0QQCQ85/kvBxEDLhvRhnBSvaQPR9yb9yJy+K+vg
+    HTD7JhBedWEMK8WYDDzvsy2PDxApBetXtLqOffpfAoGAKHhRf3ZQ9064wmT9gzWa
+    3BXTQs5+U/Lsbeg+q220Xv0DcbwxW2Q0JM+lCveu8d5w9lbtAS5IKW8XjCJZBxy7
+    0jatKySTlKXZZr8xhJtDkl0rTjRrK3aF8BlLzo45CTOeiI+KM2f8qSwle8M3pbiB
+    WLQ5R0IoosyXTGWIOHI1RFUCgYBupSilQqAZdTqd/B5ecH715OBp0IKi38hakE3R
+    rX2pVDeOu2FQZZC4yq8tTmmG71zCKPctGOJ3r/VBU1oEnLS0+yfRZGcoI/ITWqK+
+    PBSrv+TWCLtZy10xLuLfiLVy1fuVbGAT/Vc8GcsVy2ojAdmTfYEmNAj5vsLz4ju7
+    F2iO2QKBgB4V3pyb9afzZ1qr+NQ8gX7i7he4o6WcA5NKgjraThFRTUWtGEPxF88b
+    adZw5Tasm0aWWWunVIYvHBjAUiLT5zrNtFfKtHBtKThmoMJdLFj1pHIXVDlNLV+R
+    7LbHXq8PSZqiJ/UG8mYl1ijnAWDJN0K5iQoOSX3uwUHT6ZcmwUPS
+    -----END RSA PRIVATE KEY-----
+
+  # openssl rsa -in jwt.pem -pubout
+  publicKey: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoNf3F2jwPv2o/7R4ZCHL
+    SsboUPksSiL15ZSm9ZWHWkqBfQ6WMHMx08IYUmESt3ZENLPfdvwLMfxasIatRLel
+    1t8XoZJkwLgW40Tur43UWxbVwyoUsarh7MwjTJpAIa7f0lgvPDLyOpaaccvCneBR
+    neJ3DTq6frY7UGZioDEOVkn/1Lc4+HJzcAEemvXRY4N7w8gIuQwjz0eTA/+HfGWG
+    LS+NvM8wcjh2lMjpdmwFez8Q1scHI9EKQi3Tg+JuB2e88Vz5jQctwTAF/B7P6R9K
+    C2MrOshmTbTRuKX4RNZbFO33ydJMtdMexDXY7HGamIBYpsXkiPZ16eOFQ2hOkbc3
+    PQIDAQAB
+    -----END PUBLIC KEY-----
+
+server.port: 9001
+
+
+
+---
+spring:
+  profiles: service
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        # Tells the JWT framework to fetch the public key from the authorization server during startup
+        # Note: The authorization server needs to be running...
+        key-uri: http://localhost:9001/oauth/token_key
+
+server.port: 9002
+
+
+
+---
+spring:
+  profiles: zuul
+
+security:
+  basic.enabled: false
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:9001/oauth/token
+      clientId:       zuul
+      clientSecret:   zuul_password
+      scope:          inner_scope,public_scope
+    resource:
+      jwt:
+        # Tells the JWT framework to fetch the public key from the authorization server during startup
+        # Note: The authorization server needs to be running...
+        key-uri: http://localhost:9001/oauth/token_key
+
+zuul:
+  routes:
+    authorization:
+      path: /uaa/**
+      url:  http://localhost:9001
+    service:
+      path: /service/**
+      url:  http://localhost:9002
+
+server.port: 9003
